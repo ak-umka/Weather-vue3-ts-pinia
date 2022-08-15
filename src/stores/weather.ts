@@ -35,7 +35,9 @@ export const useWeatherStore = defineStore({
       loading: false,
     },
   getters: {
-
+    saveLocalStorage: (state) => {
+      localStorage.setItem("city", JSON.stringify(state.city));
+    }
   },
   actions: {
     async fetchCurrentWeather() {
@@ -49,7 +51,7 @@ export const useWeatherStore = defineStore({
           `${cityUrl}&lat=${coords.latitude}&lon=${coords.longitude}&units=metric`
         );
         this.city = [await cityRes.json()];
-        // this.city = await cityRes.json();
+        //save city to localstorage
         this.weather = await response.json();
       } catch (error) {
         console.log(error);
@@ -64,6 +66,7 @@ export const useWeatherStore = defineStore({
         const response = await fetch(`${cityUrl}&q=${name}&units=metric`);
         const res = await response.json();
         this.city.push(res);
+        //save city to localstorage
       } catch (error) {
         console.log(error);
       } finally {
