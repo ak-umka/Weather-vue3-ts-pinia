@@ -35,9 +35,10 @@ export const useWeatherStore = defineStore({
       loading: false,
     },
   getters: {
-    saveLocalStorage: (state) => {
-      localStorage.setItem("city", JSON.stringify(state.city));
-    }
+    // getLocalStorage: (state) => {
+    //   state.city = JSON.parse(localStorage.getItem("city") || "[]");
+    //   console.log(state.city);
+    // },
   },
   actions: {
     async fetchCurrentWeather() {
@@ -51,7 +52,10 @@ export const useWeatherStore = defineStore({
           `${cityUrl}&lat=${coords.latitude}&lon=${coords.longitude}&units=metric`
         );
         this.city = [await cityRes.json()];
-        //save city to localstorage
+        if(localStorage.getItem("city") === null) {
+          this.setLocalStorage()
+          console.log('current')
+        }
         this.weather = await response.json();
       } catch (error) {
         console.log(error);
@@ -66,6 +70,7 @@ export const useWeatherStore = defineStore({
         const response = await fetch(`${cityUrl}&q=${name}&units=metric`);
         const res = await response.json();
         this.city.push(res);
+        this.setLocalStorage();
         //save city to localstorage
       } catch (error) {
         console.log(error);
@@ -74,8 +79,19 @@ export const useWeatherStore = defineStore({
       }
     },
 
+    setLocalStorage() {
+      localStorage.setItem("city", JSON.stringify(this.city));
+      console.log('test')
+    },
+
+    async getLocalStorage() {
+      this.city = JSON.parse(localStorage.getItem("city") || "[]");
+      return this.city;
+      console.log(this.city);
+    },
+
     removeCity(id: number) {
       this.city.splice(id, 1);
-    }
+    },
   },
 });

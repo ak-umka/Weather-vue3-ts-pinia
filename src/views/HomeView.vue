@@ -11,13 +11,13 @@
 
     <CurrentWeather :weather="weather" :city="city" />
     <!-- {{ weather }} -->
-    <!-- {{ city  }} -->
+    <!-- {{ getLocalStorage  }} -->
   </div>
 </template>
 
 <script lang="ts">
 import { storeToRefs } from "pinia";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, ref, watch, computed  } from "vue";
 
 import { useWeatherStore } from "@/stores/weather";
 import Settings from "@/components/Settings/Settings.vue";
@@ -26,8 +26,8 @@ import CurrentWeather from "@/components/CurrentWeather.vue";
 export default defineComponent({
   setup() {
     const store = useWeatherStore();
-    const { weather, city } = storeToRefs(store);
-    const { fetchCurrentWeather } = store;
+    const { weather, city  } = storeToRefs(store);
+    const { fetchCurrentWeather, getLocalStorage } = store;
 
     const modalActive = ref(false);
     const toggleModal = () => {
@@ -38,7 +38,19 @@ export default defineComponent({
       fetchCurrentWeather();
     });
 
+    onMounted(() => {
+      setTimeout(() => {
+        getLocalStorage();
+      } , 1000);
+    });
+
+    // const test = computed(() => {
+    //   getLocalStorage()
+    // })
+
     return {
+      
+      // test,
       modalActive,
       weather,
       city,
