@@ -32,7 +32,7 @@ import { reactive } from "vue";
 import { useWeatherStore } from "../../../stores/weather";
 
 const store = useWeatherStore();
-const { city }: { [key: string] } = store;
+
 
 const newLocation = reactive({
   name: "",

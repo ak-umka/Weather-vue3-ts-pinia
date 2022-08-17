@@ -39,7 +39,7 @@ import { VueDraggableNext } from "vue-draggable-next";
 import { useWeatherStore } from "../../../stores/weather";
 
 const store = useWeatherStore();
-const { city }: { [key: string] } = store;
+const { city }: { [key: string]: any } = store;
 
 function removeLocation(item: number) {
   store.removeCity(item);
