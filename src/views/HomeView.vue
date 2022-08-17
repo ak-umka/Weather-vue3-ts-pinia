@@ -35,13 +35,15 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      fetchCurrentWeather();
+      if (!localStorage.getItem("city")) {
+        fetchCurrentWeather();
+      }
     });
 
     onMounted(() => {
       setTimeout(() => {
         getLocalStorage();
-      }, 2000);
+      }, 1000);
     });
 
     return {
