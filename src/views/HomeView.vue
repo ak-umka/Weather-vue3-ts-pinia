@@ -41,7 +41,7 @@ export default defineComponent({
     onMounted(() => {
       setTimeout(() => {
         getLocalStorage();
-      }, 1000);
+      }, 2000);
     });
 
     return {
