@@ -6,10 +6,10 @@
       type="button"
       @click="toggleModal"
     >
-      Toggle modal
+      Add Location
     </button>
 
-    <CurrentWeather :weather="weather" :city="city" />
+    <CurrentWeather :city="city" />
     <!-- {{ weather }} -->
     <!-- {{ city  }} -->
   </div>
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { storeToRefs } from "pinia";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 
 import { useWeatherStore } from "@/stores/weather";
 import Settings from "@/components/Settings/Settings.vue";
@@ -26,8 +26,8 @@ import CurrentWeather from "@/components/CurrentWeather.vue";
 export default defineComponent({
   setup() {
     const store = useWeatherStore();
-    const { weather, city } = storeToRefs(store);
-    const { fetchCurrentWeather } = store;
+    const { city } = storeToRefs(store);
+    const { fetchCurrentWeather, getLocalStorage } = store;
 
     const modalActive = ref(false);
     const toggleModal = () => {
@@ -38,9 +38,14 @@ export default defineComponent({
       fetchCurrentWeather();
     });
 
+    onMounted(() => {
+      setTimeout(() => {
+        getLocalStorage();
+      }, 1000);
+    });
+
     return {
       modalActive,
-      weather,
       city,
       toggleModal,
     };

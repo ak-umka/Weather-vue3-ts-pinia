@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { useWeatherStore } from "../../../stores/weather";
 
 const store = useWeatherStore();
@@ -45,4 +45,4 @@ function addLocation() {
 }
 </script>
 
-<style scoped></style>
+

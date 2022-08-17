@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { VueDraggableNext } from 'vue-draggable-next'
+import { VueDraggableNext } from "vue-draggable-next";
 import { useWeatherStore } from "../../../stores/weather";
 
 const store = useWeatherStore();

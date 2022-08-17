@@ -39,13 +39,6 @@
           >
             Close
           </button>
-          <!-- <button
-            class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button"
-            v-on:click="hundleClose"
-          >
-            Save Changes
-          </button> -->
         </div>
       </div>
     </div>
@@ -56,6 +49,7 @@
 <script setup lang="ts">
 import List from "./Locations/List.vue";
 import Add from "./AddLocation/Add.vue";
+
 const props = defineProps({
   modalActive: {
     type: Boolean,

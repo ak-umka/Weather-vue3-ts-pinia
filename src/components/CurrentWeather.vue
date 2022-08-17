@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-10" v-if="weather?.current">
+  <div class="pt-10">
     <div class="box-content items-center grid grid-cols-4 gap-4">
       <div
         v-for="item in city"
@@ -22,9 +22,7 @@
             <div class="mt-1">
               <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
               <span class="text-sm font-light text-gray-500">{{
-                new Date(item.sys.sunrise * 1000).toLocaleTimeString(
-                  undefined
-                )
+                new Date(item.sys.sunrise * 1000).toLocaleTimeString(undefined)
               }}</span>
             </div>
             <div>
@@ -32,9 +30,7 @@
                 ><i class="far fa-long-arrow-down"></i
               ></span>
               <span class="text-sm font-light text-gray-500">{{
-                new Date(item.sys.sunset * 1000).toLocaleTimeString(
-                  undefined
-                )
+                new Date(item.sys.sunset * 1000).toLocaleTimeString(undefined)
               }}</span>
             </div>
           </div>
@@ -43,14 +39,12 @@
           <div class="flex flex-col items-center">
             <div class="font-medium text-sm">Dew Point</div>
             <div class="text-sm text-gray-500">
-              {{ Math.round( item.clouds.all) }} %
+              {{ Math.round(item.clouds.all) }} %
             </div>
           </div>
           <div class="flex flex-col items-center">
             <div class="font-medium text-sm">Humidity</div>
-            <div class="text-sm text-gray-500">
-              {{ item.main.humidity }} °
-            </div>
+            <div class="text-sm text-gray-500">{{ item.main.humidity }} °</div>
           </div>
           <div class="flex flex-col items-center">
             <div class="font-medium text-sm">Visibility</div>
@@ -74,10 +68,6 @@ import formatTemperature from "@/helper/formatTemp";
 import getWeatherIcon from "@/helper/getWeatherIcon";
 
 const props = defineProps({
-  weather: {
-    type: Object,
-    default: () => ({}),
-  },
   city: {
     type: Object,
     default: "",
@@ -97,4 +87,3 @@ function currentDate() {
 }
 </script>
 
-<style scoped></style>
